@@ -1,0 +1,17 @@
+# Android SDK stubs and compilers (downloaded dynamically by build scripts)
+android.jar
+d8.jar
+framework.jar
+
+# Temporary build artifacts
+*.class
+classes.dex
+dist/
+
+# Logs
+*.log
+
+# IDE & OS files
+.idea/
+.vscode/
+Thumbs.db

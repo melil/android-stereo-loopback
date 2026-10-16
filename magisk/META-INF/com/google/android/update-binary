@@ -1,0 +1,38 @@
+#!/sbin/sh
+OUTFD=$2
+ZIPFILE=$3
+
+ui_print() {
+    echo -e "ui_print $1\nui_print" >> /proc/self/fd/$OUTFD
+}
+
+ui_print "****************************************"
+ui_print "*   USB Audio Stereo Loopback (48kHz)  *"
+ui_print "*        Magisk / KernelSU / APatch    *"
+ui_print "****************************************"
+
+TMPDIR=/dev/tmp_mod_extract
+rm -rf "$TMPDIR"
+mkdir -p "$TMPDIR"
+unzip -o "$ZIPFILE" -d "$TMPDIR" >/dev/null 2>&1
+
+MODPATH="/data/adb/modules/stereo_loopback"
+rm -rf "$MODPATH"
+mkdir -p "$MODPATH"
+
+cp -af "$TMPDIR/module.prop" "$MODPATH/"
+cp -af "$TMPDIR/service.sh" "$MODPATH/"
+cp -af "$TMPDIR/uninstall.sh" "$MODPATH/"
+cp -af "$TMPDIR/AudioLoop.jar" "$MODPATH/"
+
+chmod 755 "$MODPATH/service.sh"
+chmod 755 "$MODPATH/uninstall.sh"
+chmod 644 "$MODPATH/AudioLoop.jar"
+chmod 644 "$MODPATH/module.prop"
+
+rm -rf "$TMPDIR"
+
+ui_print "- Successfully installed!"
+ui_print "- Set Direct Monitor to PLAYBACK."
+ui_print "- Reboot to activate."
+exit 0

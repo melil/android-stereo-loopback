@@ -1,0 +1,6 @@
+id=stereo_loopback
+name=USB Audio Stereo Loopback (48kHz)
+version=v1.0.0
+versionCode=100
+author=melil
+description=Zero-latency persistent background stereo loopback daemon for external USB audio interfaces (48kHz/16-bit PCM).
